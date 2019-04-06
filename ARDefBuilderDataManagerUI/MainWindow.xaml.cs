@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ARDefBuilderDataManager;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,21 @@ namespace ARDefBuilderDataManagerUI
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog()
+            {
+                Filter = "Json Files (*.json)|*.json|All files|*.*"
+            };
+
+            if(ofd.ShowDialog() == true)
+            {
+                var heroes = DataReader.Read(ofd.FileName);
+
+                tvHeroes.ItemsSource = heroes;
+            }
         }
     }
 }
