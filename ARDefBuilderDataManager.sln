@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARDefBuilderDataManager", "ARDefBuilderDataManager\ARDefBuilderDataManager.csproj", "{E9D64E79-545D-432A-9ABB-3F8B6BC0E599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARDefBuilderDataManagerUI", "ARDefBuilderDataManagerUI\ARDefBuilderDataManagerUI.csproj", "{5B0C08CC-622C-423C-A271-3117AAB6E145}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9D64E79-545D-432A-9ABB-3F8B6BC0E599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D64E79-545D-432A-9ABB-3F8B6BC0E599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D64E79-545D-432A-9ABB-3F8B6BC0E599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D64E79-545D-432A-9ABB-3F8B6BC0E599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0C08CC-622C-423C-A271-3117AAB6E145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0C08CC-622C-423C-A271-3117AAB6E145}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0C08CC-622C-423C-A271-3117AAB6E145}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0C08CC-622C-423C-A271-3117AAB6E145}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FDBF5780-55D4-4784-93A9-4A73DBFBEE25}
+	EndGlobalSection
+EndGlobal
