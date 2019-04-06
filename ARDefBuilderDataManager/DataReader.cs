@@ -8,15 +8,27 @@ namespace ARDefBuilderDataManager
 {
     public static class DataReader
     {
-        public static List<HeroData> Read(string file)
+        private static readonly Dictionary<Type, string> FILE_FOR_TYPE = new Dictionary<Type, string>()
         {
-            Console.WriteLine($"Reading file @ {file}");
+            [typeof(HeroData)] = "heroes.json"
+        };
 
-            var readHeroesDb = JsonConvert.DeserializeObject<List<HeroData>>(File.ReadAllText(file));
+        public static List<HeroData> LoadFolder(string folder)
+        {
+            Console.WriteLine($"Reading folder @ {folder}");
+
+            var readHeroesDb = LoadForType<HeroData>(folder);
 
             Console.WriteLine($"Read heroes file: {readHeroesDb.Count} heroes found");
 
             return readHeroesDb;
+        }
+
+        private static List<T> LoadForType<T>(string baseFolder)
+        {
+            var path = Path.Combine(baseFolder, FILE_FOR_TYPE[typeof(T)]);
+
+            return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
         }
     }
 }

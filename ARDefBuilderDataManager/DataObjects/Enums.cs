@@ -4,6 +4,9 @@ using System.Text;
 
 namespace ARDefBuilderDataManager.DataObjects
 {
+    /// <summary>
+    /// Represents the available color types of heroes, weapons and skills.
+    /// </summary>
     public enum ColorType
     {
         Red,
@@ -12,6 +15,9 @@ namespace ARDefBuilderDataManager.DataObjects
         Neutral
     }
 
+    /// <summary>
+    /// Represents the available move type of heroes.
+    /// </summary>
     public enum MoveType
     {
         Infantry,
@@ -20,6 +26,9 @@ namespace ARDefBuilderDataManager.DataObjects
         Armored
     }
 
+    /// <summary>
+    /// Represents the available weapon types of heroes and weapons.
+    /// </summary>
     public enum WeaponType
     {
         Sword,
