@@ -1,8 +1,11 @@
 ﻿using ARDefBuilderDataManager;
+using ARDefBuilderDataManager.DataObjects;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +26,8 @@ namespace ARDefBuilderDataManagerUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        public DataViewModel ViewModelContext { get => DataContext as DataViewModel; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,15 +37,49 @@ namespace ARDefBuilderDataManagerUI
         {
             using (var folderDiag = new WinForms.FolderBrowserDialog())
             {
+                folderDiag.RootFolder = Environment.SpecialFolder.MyComputer;
+
                 var result = folderDiag.ShowDialog();
 
                 if(result == WinForms.DialogResult.OK)
                 {
-                    var heroes = DataReader.LoadFolder(folderDiag.SelectedPath);
+                    ViewModelContext.CurrentDirectory = folderDiag.SelectedPath;
 
-                    tvHeroes.ItemsSource = heroes;
+                    var dataHolder = DataReader.LoadFolder(ViewModelContext.CurrentDirectory);
+                    
+                    // TODO: Put the data holder somewhere (preferably in the DataContext).
                 }
             }
         }
+    }
+
+    public class DataViewModel : INotifyPropertyChanged
+    {
+        public string CurrentDirectory
+        {
+            get => mCurrentDirectory;
+            set => SetField(ref mCurrentDirectory, value);
+        }
+        private string mCurrentDirectory;
+
+        #region INotifyPropertyChanged Implementation
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        #endregion
     }
 }

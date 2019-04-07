@@ -5,28 +5,165 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ARDefBuilderDataManagerUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="AR-DefBuilder DataManager"
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <Grid Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Button Click="Button_Click" Content="Load" />
 
-        <ListView Name="tvHeroes" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock>
-                        <Run Text="{Binding Name}" />
-                        <Run Text="(" /><Run Text="{Binding Cooldown}" />
-                        <Run Text="{Binding SpCost}" />
-                        <Run Text="SP" /><Run Text=")" />
-                    </TextBlock>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+    <Window.DataContext>
+        <local:DataViewModel />
+    </Window.DataContext>
+    
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Open Folder..." />
+                <Separator />
+                <MenuItem Header="Exit" />
+            </MenuItem>
+
+            <MenuItem Header="Help">
+                <MenuItem Header="View Help..." />
+                <MenuItem Header="About..." />
+            </MenuItem>
+        </Menu>
+
+        <TabControl>
+            <TabItem Header="Heroes">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+                        
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+                        
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Assists">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Specials">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="A-Skills">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="B-Skills">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="C-Skills">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Seals">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Structures">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView Grid.Column="0">
+
+                    </ListView>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>
