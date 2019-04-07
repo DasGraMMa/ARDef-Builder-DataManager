@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinForms = System.Windows.Forms;
 
 namespace ARDefBuilderDataManagerUI
 {
@@ -29,16 +30,16 @@ namespace ARDefBuilderDataManagerUI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog()
+            using (var folderDiag = new WinForms.FolderBrowserDialog())
             {
-                Filter = "Json Files (*.json)|*.json|All files|*.*"
-            };
+                var result = folderDiag.ShowDialog();
 
-            if(ofd.ShowDialog() == true)
-            {
-                var heroes = DataReader.Read(ofd.FileName);
+                if(result == WinForms.DialogResult.OK)
+                {
+                    var heroes = DataReader.LoadFolder(folderDiag.SelectedPath);
 
-                tvHeroes.ItemsSource = heroes;
+                    tvHeroes.ItemsSource = heroes;
+                }
             }
         }
     }

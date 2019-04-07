@@ -21,9 +21,9 @@
                 <DataTemplate>
                     <TextBlock>
                         <Run Text="{Binding Name}" />
-                        <Run Text="(" /><Run Text="{Binding ColorType}" />
-                        <Run Text="{Binding WeaponType}" />
-                        <Run Text="{Binding MoveType}" /><Run Text=")" />
+                        <Run Text="(" /><Run Text="{Binding Cooldown}" />
+                        <Run Text="{Binding SpCost}" />
+                        <Run Text="SP" /><Run Text=")" />
                     </TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
