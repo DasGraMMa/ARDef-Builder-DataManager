@@ -41,4 +41,13 @@ namespace ARDefBuilderDataManager.DataObjects
         Breath,
         Beast
     }
+
+    /// <summary>
+    /// Represents the cost type of structures in Aether Raids.
+    /// </summary>
+    public enum CostType
+    {
+        Stones,
+        Dew
+    }
 }

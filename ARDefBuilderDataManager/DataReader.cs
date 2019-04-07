@@ -8,35 +8,32 @@ namespace ARDefBuilderDataManager
 {
     public static class DataReader
     {
-        private static readonly Dictionary<LoadType, string> FILE_FOR_TYPE = new Dictionary<LoadType, string>()
-        {
-            [LoadType.Heroes] = "heroes.json",
-            [LoadType.Weapons] = "skills.weapons.json",
-            [LoadType.Assists] = "skills.assists.json",
-            [LoadType.Specials] = "skills.specials.json",
-            [LoadType.ASkills] = "skills.aSkills.json",
-            [LoadType.BSkills] = "skills.bSkills.json",
-            [LoadType.CSkills] = "skills.cSkills.json",
-            [LoadType.Seals] = "skills.seals.json",
-            [LoadType.Structures] = "structures.json"
-        };
-
         public static DataHolder LoadFolder(string folder)
         {
-            Console.WriteLine($"Reading folder @ {folder}");
+            Logger.Info($"Reading folder @ {folder}");
 
-            var holder = new DataHolder();
-            
-            // TODO: Load files.
-            
+            // Loading is ugly, but it works.
+            var holder = new DataHolder
+            {
+                Heroes = Deserialize<List<HeroData>>(LoadType.Heroes.GetFilePath(folder)),
+                Weapons = Deserialize<List<SkillData>>(LoadType.Weapons.GetFilePath(folder)),
+                Assists = Deserialize<List<SkillData>>(LoadType.Assists.GetFilePath(folder)),
+                Specials = Deserialize<List<SkillData>>(LoadType.Specials.GetFilePath(folder)),
+                ASkills = Deserialize<List<SkillData>>(LoadType.ASkills.GetFilePath(folder)),
+                BSkills = Deserialize<List<SkillData>>(LoadType.BSkills.GetFilePath(folder)),
+                CSkills = Deserialize<List<SkillData>>(LoadType.CSkills.GetFilePath(folder)),
+                Seals = Deserialize<List<SkillSealData>>(LoadType.Seals.GetFilePath(folder)),
+                Structures = Deserialize<StructureData>(LoadType.Structures.GetFilePath(folder))
+            };
+
+            Logger.Info($"Loaded each file and created data holder.");
+
             return holder;
         }
 
-        private static List<T> LoadForType<T>(string baseFolder, LoadType type)
+        private static T Deserialize<T>(string file)
         {
-            var path = Path.Combine(baseFolder, FILE_FOR_TYPE[type]);
-
-            return JsonConvert.DeserializeObject<List<T>>(File.ReadAllText(path));
+            return JsonConvert.DeserializeObject<T>(File.ReadAllText(file));
         }
     }
 
@@ -51,5 +48,50 @@ namespace ARDefBuilderDataManager
         CSkills,
         Seals,
         Structures
+    }
+
+    static class LoadTypeExtensions
+    {
+        public static string GetFileName(this LoadType type)
+        {
+            switch(type)
+            {
+            case LoadType.Heroes:
+                return "heroes.json";
+
+            case LoadType.Weapons:
+                return "skills.weapons.json";
+
+            case LoadType.Assists:
+                return "skills.assists.json";
+
+            case LoadType.Specials:
+                return "skills.specials.json";
+
+            case LoadType.ASkills:
+                return "skills.aSkills.json";
+
+            case LoadType.BSkills:
+                return "skills.bSkills.json";
+
+            case LoadType.CSkills:
+                return "skills.cSkills.json";
+
+            case LoadType.Seals:
+                return "skills.seals.json";
+
+            case LoadType.Structures:
+                return "structures.json";
+            }
+
+            Logger.Error($"This shouldn't have happened - {type} has no file name attached.");
+
+            return null;
+        }
+
+        public static string GetFilePath(this LoadType type, string baseFolder)
+        {
+            return Path.Combine(baseFolder, type.GetFileName());
+        }
     }
 }
