@@ -11,11 +11,11 @@ namespace ARDefBuilderDataManager.DataObjects
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("cooldown")]
-        public int Cooldown { get; set; }
-
         [JsonProperty("spCost")]
         public int SpCost { get; set; }
+
+        [JsonProperty("cooldown", NullValueHandling = NullValueHandling.Ignore))]
+        public int Cooldown { get; set; }
 
         [JsonProperty("range", NullValueHandling = NullValueHandling.Ignore)]
         public int Range { get; set; }
