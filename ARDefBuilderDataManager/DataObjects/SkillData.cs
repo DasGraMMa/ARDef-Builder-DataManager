@@ -14,7 +14,7 @@ namespace ARDefBuilderDataManager.DataObjects
         [JsonProperty("spCost")]
         public int SpCost { get; set; }
 
-        [JsonProperty("cooldown", NullValueHandling = NullValueHandling.Ignore))]
+        [JsonProperty("cooldown", NullValueHandling = NullValueHandling.Ignore)]
         public int Cooldown { get; set; }
 
         [JsonProperty("range", NullValueHandling = NullValueHandling.Ignore)]
