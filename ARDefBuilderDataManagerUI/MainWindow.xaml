@@ -244,9 +244,60 @@
                         </ListView>
                     </Grid>
 
-                    <Grid Grid.Column="1">
+                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvWeapons}">
+                        <TextBlock HorizontalAlignment="Center" FontSize="24">
+                                <Run Text="Details for " /><Run Text="{Binding Name}" />
+                        </TextBlock>
 
-                    </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+                            </Grid.Resources>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="SP Cost" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SpCost}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Range" />
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Range}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Stats (if needed)" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Skill(s) needed to learn" />
+                            
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Only available for..." />
+                            
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Not available for..." />
+                            
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Effect" />
+                            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Effect}" />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             
