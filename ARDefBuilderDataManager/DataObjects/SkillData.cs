@@ -68,9 +68,6 @@ namespace ARDefBuilderDataManager.DataObjects
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
 
-        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
-        public string Title { get; set; }
-
         [JsonProperty("colorType", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public ColorType? ColorType { get; set; }
