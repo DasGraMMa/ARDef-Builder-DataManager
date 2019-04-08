@@ -5,21 +5,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ARDefBuilderDataManagerUI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="AR-DefBuilder DataManager"
+    Title="{Binding ApplicationTitle}"
     Width="800"
     Height="450"
+    WindowStartupLocation="Manual"
+    Closed="Window_Closed"
     mc:Ignorable="d">
 
     <Window.DataContext>
         <local:DataViewModel />
     </Window.DataContext>
-    
+
+    <Window.CommandBindings>
+        <CommandBinding Command="Open" Executed="CommandOpen_Executed" />
+        <CommandBinding
+            CanExecute="CommandSave_CanExecute"
+            Command="Save"
+            Executed="CommandSave_Executed" />
+    </Window.CommandBindings>
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
-                <MenuItem Header="Open Folder..." />
+                <MenuItem Command="Open" Header="_Open Folder..." InputGestureText="Ctrl+O" />
                 <Separator />
-                <MenuItem Header="Exit" />
+                <MenuItem Command="Save" Header="_Save Current Folder" InputGestureText="Ctrl+S" />
+                <Separator />
+                <MenuItem Header="_Exit" />
             </MenuItem>
 
             <MenuItem Header="Help">
@@ -28,16 +40,22 @@
             </MenuItem>
         </Menu>
 
-        <TabControl>
-            <TabItem Header="Heroes">
+        <TabControl DataContext="{Binding DataHolder}">
+            <TabItem Header="heroes.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
-                        
+                    <ListView Grid.Column="0" ItemsSource="{Binding Heroes}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding Name}" /><Run Text=" (" /><Run Text="{Binding ColorType}" /> <Run Text="{Binding WeaponType}" /> <Run Text="{Binding MoveType}" /><Run Text=")" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
 
                     <Grid Grid.Column="1">
@@ -46,7 +64,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Assists">
+            <TabItem Header="skills.assists.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -63,7 +81,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Specials">
+            <TabItem Header="skills.specials.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -80,7 +98,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="A-Skills">
+            <TabItem Header="skills.aSkills.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -97,7 +115,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="B-Skills">
+            <TabItem Header="skills.bSkills.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -114,7 +132,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="C-Skills">
+            <TabItem Header="skills.cSkills.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -131,7 +149,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Seals">
+            <TabItem Header="skills.seals.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -148,7 +166,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Structures">
+            <TabItem Header="structures.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />

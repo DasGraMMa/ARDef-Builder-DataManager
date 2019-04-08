@@ -3,6 +3,7 @@ using ARDefBuilderDataManager.DataObjects;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -31,36 +32,90 @@ namespace ARDefBuilderDataManagerUI
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load the settings for the window.
+            var settings = Properties.Settings.Default;
+            (Left, Top) = (settings.AppLocation.X, settings.AppLocation.Y);
+            (Width, Height) = (settings.AppSize.Width, settings.AppSize.Height);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            // Save the settings.
+            Properties.Settings.Default.AppSize = new System.Drawing.Size((int)Width, (int)Height);
+            Properties.Settings.Default.AppLocation = new System.Drawing.Point((int)Left, (int)Top);
+            Properties.Settings.Default.Save();
+        }
+
+        private void CommandOpen_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             using (var folderDiag = new WinForms.FolderBrowserDialog())
             {
                 folderDiag.RootFolder = Environment.SpecialFolder.MyComputer;
+                folderDiag.SelectedPath = Properties.Settings.Default.LastFolder;
 
                 var result = folderDiag.ShowDialog();
 
-                if(result == WinForms.DialogResult.OK)
+                if (result == WinForms.DialogResult.OK)
                 {
-                    ViewModelContext.CurrentDirectory = folderDiag.SelectedPath;
+                    ViewModelContext.LoadedDirectory = folderDiag.SelectedPath;
 
-                    var dataHolder = DataReader.LoadFolder(ViewModelContext.CurrentDirectory);
-                    
-                    // TODO: Put the data holder somewhere (preferably in the DataContext).
+                    // Save the last selection for the user.
+                    Properties.Settings.Default.LastFolder = ViewModelContext.LoadedDirectory;
+
+                    // Setup the dataholder for this folder.
+                    var dataHolder = DataReader.LoadFolder(ViewModelContext.LoadedDirectory);
+                    ViewModelContext.DataHolder = dataHolder;
                 }
             }
+        }
+
+        private void CommandSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandSave_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 
     public class DataViewModel : INotifyPropertyChanged
     {
-        public string CurrentDirectory
+        public string ApplicationTitle
         {
-            get => mCurrentDirectory;
-            set => SetField(ref mCurrentDirectory, value);
+            get
+            {
+                var title = "";
+                
+                if (!string.IsNullOrEmpty(LoadedDirectory)) title += "\"" + LoadedDirectory + "\" - ";
+                title += "ARDef-Builder Data Manager";
+
+                return title;
+            }
         }
-        private string mCurrentDirectory;
+
+        public string LoadedDirectory
+        {
+            get => mLoadedDirectory;
+            set
+            {
+                SetField(ref mLoadedDirectory, value);
+                OnPropertyChanged(nameof(ApplicationTitle));
+            }
+        }
+        private string mLoadedDirectory;
+
+        public DataHolder DataHolder
+        {
+            get => mDataHolder;
+            set
+            {
+                SetField(ref mDataHolder, value);
+            }
+        }
+        private DataHolder mDataHolder;
 
         #region INotifyPropertyChanged Implementation
 
