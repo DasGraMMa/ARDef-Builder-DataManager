@@ -92,7 +92,8 @@
                             </Grid.RowDefinitions>
                             
                             <TextBlock Grid.Row="0" Margin="5">
-                                <Run Text="{Binding Heroes.Count, Mode=OneWay}" /><Run Text=" Heroes in the list" />
+                                <Run Text="{Binding Heroes.Count, Mode=OneWay}" />
+                                <Run Text="Heroes in the list" />
                             </TextBlock>
 
                             <UniformGrid Grid.Row="1">
@@ -105,7 +106,10 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                    <Run Text="{Binding Name}" /><Run Text=" (" /><Run Text="{Binding ColorType}" /> <Run Text="{Binding WeaponType}" /> <Run Text="{Binding MoveType}" /><Run Text=")" />
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding ColorType}" />
+                                        <Run Text="{Binding WeaponType}" />
+                                        <Run Text="{Binding MoveType}" /><Run Text=")" />
                                     </TextBlock>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -197,6 +201,55 @@
                 </Grid>
             </TabItem>
 
+            <TabItem Header="skills.weapons.json">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding Weapons.Count, Mode=OneWay}" />
+                                <Run Text="Weapon skills in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvWeapons" ItemsSource="{Binding Weapons}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+            
             <TabItem Header="skills.assists.json">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -204,9 +257,41 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding Assists.Count, Mode=OneWay}" />
+                                <Run Text="Assist skills in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvAssists" ItemsSource="{Binding Assists}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -221,9 +306,43 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding Specials.Count, Mode=OneWay}" />
+                                <Run Text="Specials in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvSpecials" ItemsSource="{Binding Specials}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding Cooldown}" />
+                                        <Run Text="charges," />
+                                        <Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -238,9 +357,41 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding ASkills.Count, Mode=OneWay}" />
+                                <Run Text="A-Slot skills in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvASkills" ItemsSource="{Binding ASkills}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -255,9 +406,41 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding BSkills.Count, Mode=OneWay}" />
+                                <Run Text="B-Slot skills in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvBSkills" ItemsSource="{Binding BSkills}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -272,9 +455,41 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding CSkills.Count, Mode=OneWay}" />
+                                <Run Text="C-Slot skills in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvCSkills" ItemsSource="{Binding CSkills}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                        <Run Text="(" /><Run Text="{Binding SpCost}" />
+                                        <Run Text="SP)" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -289,9 +504,39 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding Seals.Count, Mode=OneWay}" />
+                                <Run Text="Sacred Seals in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
+
+                        <ListView Grid.Row="1" Name="lvSeals" ItemsSource="{Binding Seals}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Name}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
@@ -306,9 +551,9 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0">
-
-                    </ListView>
+                    <Grid Grid.Column="0">
+                        
+                    </Grid>
 
                     <Grid Grid.Column="1">
 
