@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ARDefBuilderDataManagerUI"
+    xmlns:data="clr-namespace:ARDefBuilderDataManager.DataObjects;assembly=ARDefBuilderDataManager"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     Title="{Binding ApplicationTitle}"
     Width="800"
     Height="450"
@@ -15,6 +17,35 @@
     <Window.DataContext>
         <local:DataViewModel />
     </Window.DataContext>
+
+    <Window.Resources>
+        <ObjectDataProvider
+            x:Key="EnumColorType"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:ColorType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="EnumWeaponType"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:WeaponType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider
+            x:Key="EnumMoveType"
+            MethodName="GetValues"
+            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="data:MoveType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
 
     <Window.CommandBindings>
         <CommandBinding Command="Open" Executed="CommandOpen_Executed" />
@@ -54,11 +85,23 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0" Margin="5">
-                            <Run Text="{Binding Heroes.Count, Mode=OneWay}" /><Run Text=" Heroes in the list" />
-                        </TextBlock>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Margin="5">
+                                <Run Text="{Binding Heroes.Count, Mode=OneWay}" /><Run Text=" Heroes in the list" />
+                            </TextBlock>
+
+                            <UniformGrid Grid.Row="1">
+                                <Button Content="Add new" />
+                                <Button Content="Remove selected" />
+                            </UniformGrid>
+                        </Grid>
                         
-                        <ListView Grid.Row="1" ItemsSource="{Binding Heroes}">
+                        <ListView Grid.Row="1" Name="lvHeroes" ItemsSource="{Binding Heroes}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock>
@@ -69,9 +112,88 @@
                         </ListView>
                     </Grid>
 
-                    <Grid Grid.Column="1">
-                        
-                    </Grid>
+                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvHeroes}">
+                        <TextBlock HorizontalAlignment="Center" FontSize="24">
+                                <Run Text="Details for " /><Run Text="{Binding Name}" />
+                        </TextBlock>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="HorizontalAlignment" Value="Right" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+
+                                <Style TargetType="{x:Type ComboBox}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+
+                                <Style TargetType="{x:Type CheckBox}">
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="Margin" Value="5" />
+                                </Style>
+                            </Grid.Resources>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" />
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Short Name (if needed)" />
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ShortName}" />
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Title" />
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Title}" />
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Release Date" />
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ReleaseDate}" />
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Color Type" />
+                            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumColorType}}" SelectedItem="{Binding ColorType}" />
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Weapon Type" />
+                            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumWeaponType}}" SelectedItem="{Binding WeaponType}" />
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Movement Type" />
+                            <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumMoveType}}" SelectedItem="{Binding MoveType}" />
+
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Skills" />
+
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Stats" />
+
+                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Is limited?" />
+                            <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding Limited}" />
+
+                            <TextBlock Grid.Row="10" Grid.Column="0" Text="Is Tempest Trails unit?" />
+                            <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding TtReward}" />
+
+                            <TextBlock Grid.Row="11" Grid.Column="0" Text="Is GHB unit?" />
+                            <CheckBox Grid.Row="11" Grid.Column="1" IsChecked="{Binding Ghb}" />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
             </TabItem>
 
