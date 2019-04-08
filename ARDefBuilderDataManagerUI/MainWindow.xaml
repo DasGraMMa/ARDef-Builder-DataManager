@@ -48,15 +48,26 @@
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
 
-                    <ListView Grid.Column="0" ItemsSource="{Binding Heroes}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Margin="5">
+                            <Run Text="{Binding Heroes.Count, Mode=OneWay}" /><Run Text=" Heroes in the list" />
+                        </TextBlock>
+                        
+                        <ListView Grid.Row="1" ItemsSource="{Binding Heroes}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
                                     <Run Text="{Binding Name}" /><Run Text=" (" /><Run Text="{Binding ColorType}" /> <Run Text="{Binding WeaponType}" /> <Run Text="{Binding MoveType}" /><Run Text=")" />
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
 
                     <Grid Grid.Column="1">
                         

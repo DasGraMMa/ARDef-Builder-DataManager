@@ -115,7 +115,7 @@ namespace ARDefBuilderDataManagerUI
                 SetField(ref mDataHolder, value);
             }
         }
-        private DataHolder mDataHolder;
+        private DataHolder mDataHolder = new DataHolder();
 
         #region INotifyPropertyChanged Implementation
 
