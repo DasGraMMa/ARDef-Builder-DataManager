@@ -48,11 +48,17 @@
     </Window.Resources>
 
     <Window.CommandBindings>
-        <CommandBinding Command="Open" Executed="CommandOpen_Executed" />
         <CommandBinding
-            CanExecute="CommandSave_CanExecute"
+            Command="Open"
+            Executed="CommandOpen_Executed" />
+        <CommandBinding
             Command="Save"
+            CanExecute="CommandSave_CanExecute"
             Executed="CommandSave_Executed" />
+        <CommandBinding
+            Command="SaveAs"
+            CanExecute="CommandSaveAs_CanExecute"
+            Executed="CommandSaveAs_Executed" />
     </Window.CommandBindings>
 
     <DockPanel>
@@ -61,7 +67,9 @@
                 <MenuItem Command="Open" Header="_Open Folder..." InputGestureText="Ctrl+O" />
                 <Separator />
                 <MenuItem Command="Save" Header="_Save Current Folder" InputGestureText="Ctrl+S" />
+                <MenuItem Command="SaveAs" Header="Save _As Other Folder..." InputGestureText="Ctrl+Shift+S" />
                 <Separator />
+                <MenuItem Command="Close" Header="_Close Current Folder" InputGestureText="Ctrl+W" />
                 <MenuItem Header="_Exit" />
             </MenuItem>
 
@@ -116,88 +124,106 @@
                         </ListView>
                     </Grid>
 
-                    <StackPanel Grid.Column="1" DataContext="{Binding SelectedItem, ElementName=lvHeroes}">
-                        <TextBlock HorizontalAlignment="Center" FontSize="24">
-                                <Run Text="Details for " /><Run Text="{Binding Name}" />
-                        </TextBlock>
+                    <ScrollViewer Grid.Column="1">
+                        <StackPanel DataContext="{Binding SelectedItem, ElementName=lvHeroes}">
+                            <TextBlock HorizontalAlignment="Center" FontSize="24">
+                                    <Run Text="Details for " /><Run Text="{Binding Name}" />
+                            </TextBlock>
 
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.Resources>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="HorizontalAlignment" Value="Right" />
-                                    <Setter Property="Margin" Value="5" />
-                                </Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                        <Setter Property="Margin" Value="3" />
+                                    </Style>
 
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="5" />
-                                </Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="3" />
+                                    </Style>
 
-                                <Style TargetType="{x:Type ComboBox}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="5" />
-                                </Style>
+                                    <Style TargetType="{x:Type ComboBox}">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="3" />
+                                    </Style>
 
-                                <Style TargetType="{x:Type CheckBox}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="5" />
-                                </Style>
-                            </Grid.Resources>
+                                    <Style TargetType="{x:Type CheckBox}">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="3" />
+                                    </Style>
+                                </Grid.Resources>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" />
-                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" />
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}" />
 
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Short Name (if needed)" />
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ShortName}" />
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Short Name (if needed)" />
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ShortName}" />
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Title" />
-                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Title}" />
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Title" />
+                                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Title}" />
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Release Date" />
-                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ReleaseDate}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Release Date" />
+                                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ReleaseDate}" />
 
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Color Type" />
-                            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumColorType}}" SelectedItem="{Binding ColorType}" />
+                                <TextBlock Grid.Row="4" Grid.Column="0" Text="Color Type" />
+                                <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumColorType}}" SelectedItem="{Binding ColorType}" />
 
-                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Weapon Type" />
-                            <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumWeaponType}}" SelectedItem="{Binding WeaponType}" />
+                                <TextBlock Grid.Row="5" Grid.Column="0" Text="Weapon Type" />
+                                <ComboBox Grid.Row="5" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumWeaponType}}" SelectedItem="{Binding WeaponType}" />
 
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Movement Type" />
-                            <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumMoveType}}" SelectedItem="{Binding MoveType}" />
+                                <TextBlock Grid.Row="6" Grid.Column="0" Text="Movement Type" />
+                                <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding Source={StaticResource EnumMoveType}}" SelectedItem="{Binding MoveType}" />
 
-                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Skills" />
+                                <TextBlock Grid.Row="7" Grid.Column="0" Text="Skills" />
+                                <!-- TODO: Seems pretty good. Needs a bit more love though. -->
+                                <ItemsControl Grid.Row="7" Grid.Column="1" ItemsSource="{Binding Skills}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Stats" />
+                                                <TextBox Grid.Column="0" Text="{Binding Name}" />
+                                                <TextBox Grid.Column="1" Text="{Binding Rarity}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
 
-                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Is limited?" />
-                            <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding Limited}" />
+                                <TextBlock Grid.Row="8" Grid.Column="0" Text="Stats" />
 
-                            <TextBlock Grid.Row="10" Grid.Column="0" Text="Is Tempest Trails unit?" />
-                            <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding TtReward}" />
+                                <TextBlock Grid.Row="9" Grid.Column="0" Text="Is limited?" />
+                                <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding Limited}" />
 
-                            <TextBlock Grid.Row="11" Grid.Column="0" Text="Is GHB unit?" />
-                            <CheckBox Grid.Row="11" Grid.Column="1" IsChecked="{Binding Ghb}" />
-                        </Grid>
-                    </StackPanel>
+                                <TextBlock Grid.Row="10" Grid.Column="0" Text="Is Tempest Trails unit?" />
+                                <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding TtReward}" />
+
+                                <TextBlock Grid.Row="11" Grid.Column="0" Text="Is GHB unit?" />
+                                <CheckBox Grid.Row="11" Grid.Column="1" IsChecked="{Binding Ghb}" />
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
 

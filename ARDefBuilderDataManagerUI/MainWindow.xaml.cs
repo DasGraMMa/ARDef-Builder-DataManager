@@ -72,10 +72,20 @@ namespace ARDefBuilderDataManagerUI
 
         private void CommandSave_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-
+            e.CanExecute = !string.IsNullOrEmpty(ViewModelContext.LoadedDirectory);
         }
 
         private void CommandSave_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
+        private void CommandSaveAs_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = !string.IsNullOrEmpty(ViewModelContext.LoadedDirectory);
+        }
+
+        private void CommandSaveAs_Executed(object sender, ExecutedRoutedEventArgs e)
         {
 
         }
