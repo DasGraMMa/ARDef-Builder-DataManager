@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace ARDefBuilderDataManager
@@ -15,14 +16,14 @@ namespace ARDefBuilderDataManager
             // Loading is ugly, but it works.
             var holder = new DataHolder
             {
-                Heroes = Deserialize<List<HeroData>>(LoadType.Heroes.GetFilePath(folder)),
-                Weapons = Deserialize<List<SkillData>>(LoadType.Weapons.GetFilePath(folder)),
-                Assists = Deserialize<List<SkillData>>(LoadType.Assists.GetFilePath(folder)),
-                Specials = Deserialize<List<SkillData>>(LoadType.Specials.GetFilePath(folder)),
-                ASkills = Deserialize<List<SkillData>>(LoadType.ASkills.GetFilePath(folder)),
-                BSkills = Deserialize<List<SkillData>>(LoadType.BSkills.GetFilePath(folder)),
-                CSkills = Deserialize<List<SkillData>>(LoadType.CSkills.GetFilePath(folder)),
-                Seals = Deserialize<List<SkillSealData>>(LoadType.Seals.GetFilePath(folder)),
+                Heroes = Deserialize<ObservableCollection<HeroData>>(LoadType.Heroes.GetFilePath(folder)),
+                Weapons = Deserialize<ObservableCollection<SkillData>>(LoadType.Weapons.GetFilePath(folder)),
+                Assists = Deserialize<ObservableCollection<SkillData>>(LoadType.Assists.GetFilePath(folder)),
+                Specials = Deserialize<ObservableCollection<SkillData>>(LoadType.Specials.GetFilePath(folder)),
+                ASkills = Deserialize<ObservableCollection<SkillData>>(LoadType.ASkills.GetFilePath(folder)),
+                BSkills = Deserialize<ObservableCollection<SkillData>>(LoadType.BSkills.GetFilePath(folder)),
+                CSkills = Deserialize<ObservableCollection<SkillData>>(LoadType.CSkills.GetFilePath(folder)),
+                Seals = Deserialize<ObservableCollection<SkillSealData>>(LoadType.Seals.GetFilePath(folder)),
                 Structures = Deserialize<StructureData>(LoadType.Structures.GetFilePath(folder))
             };
 
